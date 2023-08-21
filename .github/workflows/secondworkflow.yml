@@ -1,0 +1,16 @@
+name: secondworkflow
+on: workflow_dispatch 
+jobs:
+  Deploy-to-QA:
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+      - name: deploy
+        run: echo "QA deployment completed,QA can proceed with their testing"
+  Deploy-to-Prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy2
+        run: echo "Prod deployment successful" 
+  
+  
