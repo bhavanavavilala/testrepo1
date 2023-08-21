@@ -2,7 +2,7 @@ name: firstworkflow
 on: workflow_dispatch 
 jobs:
   Deploy-to-Dev:
-    runs-on: ubuntu-latest
+    runs-on: aaubuntu-latest
     environment: Development
     steps:
       - name: deploy
