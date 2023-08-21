@@ -1,4 +1,4 @@
-name: actions3
+name: firstworkflow
 on: workflow_dispatch 
 jobs:
   Deploy-to-Dev:
