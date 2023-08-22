@@ -6,9 +6,9 @@ jobs:
     environment: Development
     steps:
       - name: deploy
-        run: echo "Develeopment changes are pushed to Dev env"
+        run: pip install py
   Deploy-to-Prod:
     runs-on: ubuntu-latest
     steps:
       - name: deploy2
-        run: echo "Production deployment successful" 
+        run: yum install apach
