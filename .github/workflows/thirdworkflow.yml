@@ -6,7 +6,7 @@ jobs:
     environment: Development
     steps:
       - name: deploy
-        run: pip install py
+        run: yumt install py
   Deploy-to-Prod:
     runs-on: ubuntu-latest
     steps:
