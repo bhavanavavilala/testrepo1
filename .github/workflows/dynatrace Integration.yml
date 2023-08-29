@@ -1,0 +1,36 @@
+name: Dynatrace Deployment Event
+
+on: [push]  # You can customize the event that triggers the workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14  # Choose the appropriate version
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Trigger Dynatrace Deployment Event
+        run: |
+          curl -X POST "https:bdp69097.live.dynatrace.com/api/v2/apiTokens" -H "accept: application/json; charset=utf-8" -H "Content-Type: application/json; charset=utf-8" -d "{\"scopes\":[\"activeGateTokenManagement.create\",\"entities.read\",\"settings.read\",\"settings.write\",\"DataExport\",\"InstallerDownload\"],\"name\":\"demo token\",\"expirationDate\":\"2024-08-31T18:29:59.999Z\"}" \
+          -H "Authorization: Api-Token ${{ secrets.DT_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "eventType": "CUSTOM_DEPLOYMENT",
+                "source": "GitHub Actions",
+                "deploymentName": "My Deployment",
+                "deploymentVersion": "${{ github.sha }}",
+                "remediationAction": "DEPLOY",
+                "ciBackLink": "${{ github.event.repository.html_url }}",
+                "customProperties": {
+                  "environment": "production"
+                }
+              }'
