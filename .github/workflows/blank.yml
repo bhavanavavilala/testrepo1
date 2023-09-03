@@ -11,4 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: deploy2
-        run: echo "Production deployment successful" 
+        run: echo "Production deployment successfully completed" 
+        
