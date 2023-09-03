@@ -1,6 +1,6 @@
 name: Dynatrace Deployment Event
 
-on: [push]  # You can customize the event that triggers the workflow
+on: workflow_dispatch   #[push]  You can customize the event that triggers the workflow
 
 jobs:
   deploy:
