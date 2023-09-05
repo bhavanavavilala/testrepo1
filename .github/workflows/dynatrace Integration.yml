@@ -1,9 +1,6 @@
 name: Dynatrace Integration
 
 on: [push]
-  #push:
-    #branches:
-      - main  # Customize according to your branch.
 
 jobs:
   deploy:
