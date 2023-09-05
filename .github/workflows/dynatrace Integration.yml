@@ -3,7 +3,7 @@ name: Dynatrace Integration
 on:
   push:
     branches:
-      - main  # Customize based on your branch
+      - main  # Customize according to your branch.
 
 jobs:
   deploy:
