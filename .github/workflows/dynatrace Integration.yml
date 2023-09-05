@@ -1,6 +1,9 @@
-name: Dynatrace Deployment Event
+name: Dynatrace Integration
 
-on: [push]  # You can customize the event that triggers the workflow
+on:
+  push:
+    branches:
+      - main  # Customize based on your branch
 
 jobs:
   deploy:
@@ -10,27 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14  # Choose the appropriate version
-      
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Trigger Dynatrace Deployment Event
+      - name: Set up Dynatrace Event
         run: |
-          curl -X POST "https:bdp69097.live.dynatrace.com/api/v2/apiTokens" -H "accept: application/json; charset=utf-8" -H "Content-Type: application/json; charset=utf-8" -d "{\"scopes\":[\"activeGateTokenManagement.create\",\"entities.read\",\"settings.read\",\"settings.write\",\"DataExport\",\"InstallerDownload\"],\"name\":\"demo token\",\"expirationDate\":\"2024-08-31T18:29:59.999Z\"}" \
-          -H "Authorization: Api-Token ${{ secrets.DT_API_TOKEN }}" \
+          
+          # Replace <YOUR_DYNATRACE_TENANT> with your Dynatrace tenant URL
+          # Replace <YOUR_DYNATRACE_API_TOKEN_SECRET> with the name of your GitHub secret
+          # Customize the event payload as needed
+          curl -X POST "https://wnx02121.live.dynatrace.com/api/v2/events" \
+          -H "Authorization: Api-Token ${{ secrets.DYNA_API }}" \
           -H "Content-Type: application/json" \
           -d '{
-                "eventType": "CUSTOM_DEPLOYMENT",
-                "source": "GitHub Actions",
-                "deploymentName": "My Deployment",
-                "deploymentVersion": "${{ github.sha }}",
-                "remediationAction": "DEPLOY",
-                "ciBackLink": "${{ github.event.repository.html_url }}",
+                "eventType": "CUSTOM_EVENT",
+                "eventName": "Deployment",
+                "description": "GitHub Actions Deployment",
                 "customProperties": {
-                  "environment": "production"
+                  "branch": "${{ github.ref }}",
+                  "commit": "${{ github.sha }}"
                 }
               }'
