@@ -14,7 +14,7 @@ jobs:
         uses: dynatrace-oss/dynatrace-github-action@v9
         with:
           url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_API_TOKEN }}'
+          token: '${{ secrets.DYNA_API }}'
           events: |
             - title: "Build failed"
               type: CUSTOM_INFO
