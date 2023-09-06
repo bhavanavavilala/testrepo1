@@ -6,8 +6,14 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+  deploy-one:
+    runs-on: ubuntu-latest
+    steps:
     - name: build
       run: this-will-fail
+  deploy-two:
+    runs-on: ubuntu-latest
+    steps:
     - name: Notify Dynatrace on Build Failed
       if: failure()
       uses: dynatrace-oss/dynatrace-github-action@v9
