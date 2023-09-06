@@ -4,37 +4,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-  
-  deploy-two: 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Dynatrace Event
-        run: |
-          npm install @dynatrace/strato-components-preview
-          npm install @dynatrace/strato-design-tokens
-          npm install @dynatrace/strato-icons
-  deploy-three: 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build count
-        uses: dynatrace-oss/dynatrace-github-action@v9
-        with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_API_TOKEN }}'
-          metrics: |
-            - metric: "github.metric1"
-              value: "1.0"
-              dimensions:
-                project: "${{ github.repository }}"
-                branch: "${{ github.ref }}"
-          event: "${{ github.event_name }}"
-          owner: ${{ github.repository_owner }}
-    
-  deploy-four:
-    runs-on: ubuntu-latest
-    steps:
     - name: checkout
       uses: actions/checkout@v2
     - name: build
@@ -44,7 +13,7 @@ jobs:
       uses: dynatrace-oss/dynatrace-github-action@v9
       with:
         url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DT_TOKEN }}'
+        token: '${{ secrets.NEW_DYNA_TOK }}'
         events: |
           - title: "Build failed"
             type: CUSTOM_INFO
