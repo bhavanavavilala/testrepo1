@@ -9,7 +9,7 @@ jobs:
       uses: dynatrace-oss/dynatrace-github-action@v9
       with:
         url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DYNA_API }}'
+        token: '${{ secrets.NEW_DYNA_TOK }}'
         metrics: |
           - metric: "github.metric1"
             value: "1.0"
