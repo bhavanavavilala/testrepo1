@@ -1,13 +1,30 @@
-- name: Build count
-  uses: dynatrace-oss/dynatrace-github-action@v9
-  with:
-    url: '${{ secrets.DT_URL }}'
-    token: '${{ secrets.DT_API_TOKEN }}'
-    metrics: |
-      - metric: "github.metric1"
-        value: "1.0"
-        dimensions:
-          project: "${{ github.repository }}"
-          branch: "${{ github.ref }}"
+name: Dyna-actions
+on: workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Dynatrace Event
+        run: |
+          npm install @dynatrace/strato-components-preview
+          npm install @dynatrace/strato-design-tokens
+          npm install @dynatrace/strato-icons
+
+      - name: Build count
+        uses: dynatrace-oss/dynatrace-github-action@v9
+        with:
+          url: '${{ secrets.DT_URL }}'
+          token: '${{ secrets.DT_API_TOKEN }}'
+          metrics: |
+            - metric: "github.metric1"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
           event: "${{ github.event_name }}"
           owner: ${{ github.repository_owner }}
+
+   
