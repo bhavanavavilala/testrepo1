@@ -31,5 +31,28 @@ jobs:
                 branch: "${{ github.ref }}"
           event: "${{ github.event_name }}"
           owner: ${{ github.repository_owner }}
-
-   
+    
+  deploy-four:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build
+      run: this-will-fail
+    - name: Notify Dynatrace on Build Failed
+      if: failure()
+      uses: dynatrace-oss/dynatrace-github-action@v9
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DT_TOKEN }}'
+        events: |
+          - title: "Build failed"
+            type: CUSTOM_INFO
+            entitySelector: type(host),entityName(myHost)
+            properties:
+              description: "Branch ${{ github.ref }} failed to build"
+              source: GitHub
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+              owner: ${{ github.repository_owner }}
