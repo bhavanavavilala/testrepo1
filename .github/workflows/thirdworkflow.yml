@@ -1,14 +1,20 @@
-name: thirdworkflow
+name: dyna-codeone
 on: workflow_dispatch 
 jobs:
-  Deploy-to-Dev:
+  Demo-one:
     runs-on: ubuntu-latest
     environment: Development
     steps:
-      - name: deploy
-        run: yumt install py
-  Deploy-to-Prod:
-    runs-on: ubuntu-latest
-    steps:
-      - name: deploy2
-        run: yum install apach
+    - name: Build count
+      uses: dynatrace-oss/dynatrace-github-action@v9
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DYNA_API }}'
+        metrics: |
+          - metric: "github.metric1"
+            value: "1.0"
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+              owner: "${{ github.owner }}"
