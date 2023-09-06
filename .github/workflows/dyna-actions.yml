@@ -2,7 +2,7 @@
   uses: dynatrace-oss/dynatrace-github-action@v9
   with:
     url: '${{ secrets.DT_URL }}'
-    token: '${{ secrets.DT_TOKEN }}'
+    token: '${{ secrets.DT_API_TOKEN }}'
     metrics: |
       - metric: "github.metric1"
         value: "1.0"
