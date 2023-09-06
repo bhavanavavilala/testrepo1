@@ -10,4 +10,4 @@
           project: "${{ github.repository }}"
           branch: "${{ github.ref }}"
           event: "${{ github.event_name }}"
-          owner: wolfgang
+          owner: ${{ github.repository_owner }}
