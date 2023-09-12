@@ -1,0 +1,20 @@
+name: PR Validation
+on:
+  pull_request:
+    branches:
+      - main # You can specify the branch you want to trigger this workflow for
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: npm install 
+      - name: Run tests
+        run: npm test
+      # Add more steps for additional validation tasks like code linting, building, etc.
