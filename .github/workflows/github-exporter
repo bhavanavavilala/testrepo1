@@ -1,0 +1,39 @@
+name: Export GitHub Actions Metrics
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Run every hour, adjust as needed
+
+jobs:
+  export_metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' # Choose your desired Python version
+
+    - name: Install dependencies
+      run: pip install prometheus_client
+
+    - name: Run metrics collection script
+      run: python metrics.py # Replace with your script for collecting metrics
+
+    - name: Publish metrics to Prometheus
+      run: |
+        echo 'from prometheus_client import CollectorRegistry, Gauge, push_to_gateway, start_http_server' >> metrics.py
+        echo 'import os' >> metrics.py
+        echo '' >> metrics.py
+        echo 'registry = CollectorRegistry()' >> metrics.py
+        echo 'g = Gauge("github_actions_metrics", "GitHub Actions Metrics", ["repository", "workflow"])' >> metrics.py
+        echo '' >> metrics.py
+        echo '# Add your metric collection logic here' >> metrics.py
+        echo 'g.labels(repository=os.getenv("GITHUB_REPOSITORY"), workflow=os.getenv("GITHUB_WORKFLOW")).set(42)' >> metrics.py
+        echo '' >> metrics.py
+        echo 'start_http_server(8000)' >> metrics.py
+        echo 'push_to_gateway("prometheus.example.com:9091", job="github_actions_metrics", registry=registry)' >> metrics.py
+        python metrics.py
