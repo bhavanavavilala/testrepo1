@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GB_TOKEN:${{secrets.GITHUB_TOKEN}} #set the secret as an environment variable
+      GITHUB_TOKEN:${{secrets.GB_TOKEN}} #set the secret as an environment variable
 
     steps:
     - name: Checkout code
