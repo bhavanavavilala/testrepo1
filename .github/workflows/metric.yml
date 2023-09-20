@@ -8,6 +8,9 @@ jobs:
   export_metrics:
     runs-on: ubuntu-latest
 
+    env:
+      GB_TOKEN:${{secrets.GITHUB_TOKEN}} #set the secret as an environment variable
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
