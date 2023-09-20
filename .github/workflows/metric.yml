@@ -26,19 +26,19 @@ jobs:
         pip install prometheus_client
         pip install requests
     - name: Run metrics collection script
-      run: python metrics.py # Replace with your script for collecting metrics
+      run: python workflow_metrics.py # Replace with your script for collecting metrics
 
     - name: Publish metrics to Prometheus
       run: |
-        echo 'from prometheus_client import CollectorRegistry, Gauge, push_to_gateway, start_http_server' >> metrics.py
-        echo 'import os' >> metrics.py
-        echo '' >> metrics.py
-        echo 'registry = CollectorRegistry()' >> metrics.py
-        echo 'g = Gauge("github_actions_metrics", "GitHub Actions Metrics", ["repository", "workflow"])' >> metrics.py
-        echo '' >> metrics.py
-        echo '# Add your metric collection logic here' >> metrics.py
-        echo 'g.labels(repository=os.getenv("GITHUB_REPOSITORY"), workflow=os.getenv("GITHUB_WORKFLOW")).set(42)' >> metrics.py
-        echo '' >> metrics.py
-        echo 'start_http_server(8000)' >> metrics.py
-        echo 'push_to_gateway("prometheus.example.com:9091", job="github_actions_metrics", registry=registry)' >> metrics.py
-        python metrics.py
+        echo 'from prometheus_client import CollectorRegistry, Gauge, push_to_gateway, start_http_server' >> workflow_metrics.py
+        echo 'import os' >> workflow_metrics.py
+        echo '' >> workflow_metrics.py
+        echo 'registry = CollectorRegistry()' >> workflow_metrics.py
+        echo 'g = Gauge("github_actions_metrics", "GitHub Actions Metrics", ["repository", "workflow"])' >> workflow_metrics.py
+        echo '' >> workflow_metrics.py
+        echo '# Add your metric collection logic here' >> workflow_metrics.py
+        echo 'g.labels(repository=os.getenv("GITHUB_REPOSITORY"), workflow=os.getenv("GITHUB_WORKFLOW")).set(42)' >> workflow_metrics.py
+        echo '' >> workflow_metrics.py
+        echo 'start_http_server(8000)' >> workflow_metrics.py
+        echo 'push_to_gateway("prometheus.example.com:9091", job="github_actions_metrics", registry=registry)' >> workflow_metrics.py
+        python workflow_metrics.py
