@@ -1,15 +1,16 @@
 name: Export GitHub Actions Metrics
 
-on: workflow_dispatch
-  #schedule:
-  #  - cron: '0 * * * *' # Run every hour, adjust as needed
+on: 
+  workflow_dispatch:
+    # schedule:
+    #   - cron: '0 * * * *' # Run every hour, adjust as needed
 
 jobs:
   export_metrics:
     runs-on: ubuntu-latest
 
     env:
-      GB_TOKEN:${{secrets.GB_TOKEN}} #set the secret as an environment variable
+      GB_TOKEN: ${{ secrets.GB_TOKEN }} # Set the secret as an environment variable
 
     steps:
     - name: Checkout code
@@ -24,7 +25,6 @@ jobs:
       run: |
         pip install prometheus_client
         pip install requests
-
     - name: Run metrics collection script
       run: python metrics.py # Replace with your script for collecting metrics
 
