@@ -1,5 +1,6 @@
 import requests
 import json
+from prometheus_client import start_http_server, Gauge
 
 # Replace with your GitHub Personal Access Token
 token = "GB_TOKEN"
@@ -25,16 +26,25 @@ if response.status_code == 200:
     success_workflows = sum(1 for run in data["workflow_runs"] if run["conclusion"] == "success")
     failure_workflows = sum(1 for run in data["workflow_runs"] if run["conclusion"] == "failure")
 
+    # Create Prometheus metrics
+    workflow_success_rate = Gauge('workflow_success_rate', 'Success rate of workflows')
+    workflow_failure_rate = Gauge('workflow_failure_rate', 'Failure rate of workflows')
+
+    # Calculate success and failure rates
+    success_rate = success_workflows / total_workflows
+    failure_rate = failure_workflows / total_workflows
+
+    # Set the metrics values
+    workflow_success_rate.set(success_rate)
+    workflow_failure_rate.set(failure_rate)
+
+    # Start the HTTP server to expose metrics
+    start_http_server(8080)
+
     # Expose metrics in Prometheus format
     prometheus_metrics = f"""\
-# HELP workflow_success_rate Success rate of workflows
-# TYPE workflow_success_rate gauge
-workflow_success_rate {{"repository"="{owner}/{repo}"}} {success_workflows / total_workflows}
-
-# HELP workflow_failure_rate Failure rate of workflows
-# TYPE workflow_failure_rate gauge
-workflow_failure_rate {{"repository"="{owner}/{repo}"}} {failure_workflows / total_workflows}
-"""
+    # Metrics are already being exposed by Prometheus server
+    """
 
     print(prometheus_metrics)
 else:
