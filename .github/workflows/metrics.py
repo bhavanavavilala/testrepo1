@@ -32,7 +32,7 @@ failure_rate_metric = Gauge("github_actions_failure_rate", "GitHub Actions Failu
 
 # Replace with your GitHub repository and token
 repository_name = os.getenv("GITHUB_REPOSITORY")
-github_token = os.getenv("GITHUB_TOKEN")
+github_token = os.getenv("GB_TOKEN")
 
 # Fetch workflow runs from GitHub API
 workflow_runs = fetch_workflow_runs(repository_name, github_token)
