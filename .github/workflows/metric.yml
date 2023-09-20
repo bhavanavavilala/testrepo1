@@ -1,8 +1,8 @@
 name: Export GitHub Actions Metrics
 
-on:
-  schedule:
-    - cron: '0 * * * *' # Run every hour, adjust as needed
+on: workflow_dispatch
+  #schedule:
+  #  - cron: '0 * * * *' # Run every hour, adjust as needed
 
 jobs:
   export_metrics:
