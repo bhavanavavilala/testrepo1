@@ -2,11 +2,11 @@ import requests
 import json
 
 # Replace with your GitHub Personal Access Token
-token = "YOUR_GITHUB_TOKEN"
+token = "GB_TOKEN"
 
 # Replace with your GitHub repository owner and name
-owner = "yourusername"
-repo = "yourrepository"
+owner = "bhavanavavilala"
+repo = "testrepo1"
 
 headers = {
     "Authorization": f"token {token}",
