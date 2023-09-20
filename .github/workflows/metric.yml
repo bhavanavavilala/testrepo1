@@ -21,7 +21,7 @@ jobs:
       run: pip install prometheus_client
 
     - name: Run metrics collection script
-      run: python metrics.py # Replace with your script for collecting metrics
+      run: python testrepo1/metrics.py # Replace with your script for collecting metrics
 
     - name: Publish metrics to Prometheus
       run: |
