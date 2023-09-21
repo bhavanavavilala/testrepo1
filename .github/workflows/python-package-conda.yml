@@ -23,4 +23,4 @@ jobs:
         pip install prometheus_client requests
 
     - name: Run Python Script
-      run: python path/to/your/script.py  # Update with the actual path to your script
+      run: python workflow_metrics.py  # Update with the actual path to your script
