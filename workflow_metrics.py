@@ -4,7 +4,7 @@ import requests
 import json
 
 # Replace with your GitHub Personal Access Token
-token = "GB_TOKEN"
+token = "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"
 
 # Replace with your GitHub repository owner and name
 owner = "bhavanavavilala"
