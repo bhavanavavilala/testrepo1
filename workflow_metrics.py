@@ -41,7 +41,7 @@ if response.status_code == 200:
     workflow_failure_rate.set(failure_rate)
 
     # Push metrics to Prometheus Pushgateway
-    push_to_gateway('localhost:9091', job='github_actions_metrics', registry=registry)
+    push_to_gateway('localhost:9090', job='github_actions_metrics', registry=registry)
 
     # Start the HTTP server to expose metrics
     start_http_server(8000)
