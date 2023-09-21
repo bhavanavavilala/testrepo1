@@ -39,7 +39,7 @@ if response.status_code == 200:
     workflow_failure_rate.set(failure_rate)
 
     # Start the HTTP server to expose metrics
-    start_http_server(8080)
+    start_http_server(8000)
 
     # Expose metrics in Prometheus format
     prometheus_metrics = f"""\
