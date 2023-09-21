@@ -11,7 +11,7 @@ owner = "bhavanavavilala"
 repo = "testrepo1"
 
 headers = {
-    "Authorization": f"token {token}",
+    "Authorization": f"{token}",
     "Accept": "application/vnd.github.v3+json",
 }
 
