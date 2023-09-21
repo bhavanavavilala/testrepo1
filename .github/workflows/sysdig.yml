@@ -1,9 +1,9 @@
 name: Sysdig Secure Scan
 
-on:
-  push:
-    branches:
-      - main  # Customize this to the branch you want to trigger the scan on...
+on: workflow_default
+  #push:
+   # branches:
+    #  - main  # Customize this to the branch you want to trigger the scan on...
 
 jobs:
   security_scan:
