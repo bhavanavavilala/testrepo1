@@ -1,0 +1,26 @@
+name: Run Python Script
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger the workflow on
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest  # You can choose a different runner if needed
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Choose your desired Python version
+
+    - name: Install dependencies
+      run: |
+        pip install prometheus_client requests
+
+    - name: Run Python Script
+      run: python path/to/your/script.py  # Update with the actual path to your script
